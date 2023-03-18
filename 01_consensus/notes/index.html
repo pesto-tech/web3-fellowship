@@ -391,7 +391,7 @@ validating those transactions and blocks, and then relaying them to further full
 </script></section>
 
 
-<section>
+<!-- <section>
 <p data-markdown>
 ## Trilemma of distributed system
 </p>
@@ -432,7 +432,7 @@ validating those transactions and blocks, and then relaying them to further full
 * Node 1 relays updated state message to others
 * Node 2 and 4 somehow can't receive update so are not aware of the change in state
 * if I query Node 2, it will avail me the color but not the red.Consistent. 
-</script></section>
+</script></section> -->
 
 <section>
 <p data-markdown>
@@ -457,7 +457,17 @@ validating those transactions and blocks, and then relaying them to further full
 * No solution for 1/3 traitors
 * Solution to all remaining cases : PBFT
  * PBFT gives an algorithm to allow nodes to come to consensus with no more than 1/3 byzantine 
+</script></section>
 
+<section data-markdown><script type="text/template">
+
+## Practical Byzantine fault tolerance
+* Works in a small group of ~50 close nodes
+* Communication is trivial
+* Consensus is achieved via voting
+ * Employs voting via "leader" nodes in round robin format on rotational basis.
+ * If the leader acting maliciously, they can be removed by a majority votes from nodes
+ 
 </script></section>
 
 <section data-markdown><script type="text/template">
@@ -465,10 +475,10 @@ validating those transactions and blocks, and then relaying them to further full
 ## Faults in distributed systems
 
 * fail-stop 
- * Node crashes and hence cannot return values
+  * Node crashes and hence cannot return values
 * Byzantine fault 
- * Arbitrary deviance from the protocol : means not only the nodes might stop replying or receiving information
-   but also send corrupt and false information
+  * Arbitrary deviance from the protocol : means not only the nodes might stop replying or receiving information
+    but also send corrupt and false information
 
 </script></section>
 
@@ -484,11 +494,35 @@ validating those transactions and blocks, and then relaying them to further full
 
 <section data-markdown><script type="text/template">
 
-## Proof Of Work
-* Evidence
-* Spent resources
-* Need to solve a problem via brute forcing
- * Like brute forcing a password -- trial and error
+## Challanges in distributed system
+* Following are of paramount importance for distributed system 
+  * Verifying authenticity
+  * Process of building agreement among a network of mutually distrusting participants.
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Issues of pBFT with bitcoin
+* pBFT can't scale for Bitcoin because :
+ * Consensus in bitcoin depends on entire state og blockchain
+ * Validity of all of its transactions is distributed to thousands of nodes which continually connect and disconnect 
+* There is a need for inherent cost to participating in bitcoin like system of consensus to discourage participants from acting maliciously 
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Solving Bitcoin consensus problem
+* Bitcoin can operate as a BFT, open and P2P distributed network via
+ * PoW mining consensus algorithm
+ * Specific set of rules that govern mechanism in order to achieve trustless consensus across the network.
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Nakamoto Consensus
+* Set of rules in conjunction with Proof-Of-Work consensus model in the network that govern the consensus mechanism and ensure its trustless nature
+* Bitcoin became first BFT, open and distributed P2P network that utilizes a distributed network of anonymous nodes that are free to join and leave the network at will 
 </script></section>
 
 <section data-markdown><script type="text/template">
@@ -496,8 +530,36 @@ validating those transactions and blocks, and then relaying them to further full
 ## Nakamoto Consensus
 * Miners solve partial preimage hash puzzle
 * Prevent Sybil attacks
+<br/><br/>
 Resource(s) consumed = Computational power
 </script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Nakamoto Consensus
+ 
+* Proof Of Work
+* Block Selection
+ * Lottery process for miners
+* Scarcity
+ * Block reward halved every 210,000 blocks (~ 4 years)
+ * Deflationary - mined to 21 million 
+* Incentive structure
+ * Miners are incentivized to validate and secure the network honestly,
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Proof Of Work
+* Evidence
+* Spent resources
+* Need to solve a problem via brute forcing
+ * Like brute forcing a password -- trial and error
+* Demo simple PoW in blockchain
+</script></section>
+
+
 
 <section data-markdown><script type="text/template">
 
@@ -508,28 +570,14 @@ Resource(s) consumed = Computational power
 
 <section data-markdown><script type="text/template">
 
-## Cons of PoW
-
-<img src="btc-emission-news.png" width="400">
-<img src="btc-gold.png" width="500">
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Cons of PoW
-* Plus, it's not really that decentralized
+## Overview of Proof of Stake
+* Validators instead of "miners"
+* Locking up "stake"
+<br/><br/>
+* Resources consumed 
+ * Native currency
 
 </script></section>
-
-<section data-markdown><script type="text/template">
-
-## Cons of PoW
-
-![](miner-pie-chart.png)
-
-</script></section>
-
 
 <section data-markdown><script type="text/template">
 
@@ -543,7 +591,9 @@ Resource(s) consumed = Computational power
 
 ## Proof of Stake
 * This way, instead of utilizing energy to answer PoW puzzles, a PoS miner is limited to mining a percentage of transactions that is reflective of his or her ownership stake. For instance, a miner who owns 3% of the Bitcoin available can theoretically mine only 3% of the blocks.
-* More hashing power != more mining rewards
+
+<br/><br/>
+More hashing power != more mining rewards
 
 </script></section>
 
@@ -552,7 +602,7 @@ Resource(s) consumed = Computational power
 
 ## Nothing at Stake Problem
 * However, validators do not have anything at stake when the network forks; they can simply bet on all the forked chains since they have no incentive mechanism to choose
-* Some versions of Gasper punish users who engage in such behavior as it can lead to lack of protection against double spend
+* Some versions of Gasper(used in Ethereum) punish users who engage in such behavior as it can lead to lack of protection against double spend
 
 </script></section>
 
@@ -573,6 +623,14 @@ Resource(s) consumed = Computational power
 
 
 <section data-markdown><script type="text/template">
+
+## Proof-of-Stake summary
+
+<img src="pos-summary.png" width="800">
+</script></section>
+
+
+<!-- <section data-markdown><script type="text/template">
 
 ## Other Consensus Models
 * DPoS
@@ -663,6 +721,10 @@ Resource(s) consumed = Computational power
 * Proof of ownership (a signature)
 * Available funds
 * No other transactions using the same funds
+</script></section>-->
+
+<section data-markdown><script type="text/template">
+(Optional)
 </script></section>
 
 <section>
@@ -800,8 +862,7 @@ Resource(s) consumed = Computational power
 
 ## Genesis Block
 
-![](genesis.png)
-
+<img src="genesis.png" width="600">
 </script></section>
 
 <section data-markdown style="font-size: xx-large;"><script type="text/template">
@@ -821,9 +882,9 @@ Resource(s) consumed = Computational power
 ## Conflicts
 
 * What if there are multiple miners that solve a PoW problem simultaneously?
-* Unlikely but not impossible
-* This leads to a fork. Multiple blocks could be added to all the subchains in the fork
-* We need a mechanism to decide between forks
+ * Unlikely but not impossible
+ * This leads to a fork. Multiple blocks could be added to all the subchains in the fork
+ * We need a mechanism to decide between forks
 
 </script></section>
 
