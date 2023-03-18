@@ -118,58 +118,577 @@
 <section>
 <p data-markdown>
 ## `$WHOAMI`
+#### Dhruvin Parikh
+</p>
+
+<div class="left" style="width: 25%;" >
+  <img src="headshot.png" style="width:250px; border: none;" />
+</div>
+
+<div class="right" style="width:75%; font-size: x-large;"><p data-markdown>
+* Blockchain developer and Instructor
+* Been in this space since 2017
+* Sr. Smart Contract Engineer at Hype Labs
+* Technical Co-Founder and CTO at opty.fi
+* Adjunct Blockchain Professor at York University (2020-present)
+* Advising web3 projects
+* Adjunct Blockchain Professor at George Brown College  (2019-2022)  
+</p></div>
+
+<p data-markdown>
+```
+GitHub : @dhruvinparikh 
+Twitter : @dhruvinparikh_
+LinkedIn : linkedin.com/in/dhruvinparikh
+```
+</p>
+
+</section>
+
+<section data-markdown style="font-size: xx-large;"><script type="text/template">
+
+## Zoom etiquetes
+
+* Do not record the Zoom meeting.
+* Please keep your mic muted unless you are speaking, to minimize background noise
+* Please keep your video on. We would like to make our online class experience as close to a regular in-person class. You would not want to be invisible to the instructor and your classmates if you were attending a regular in-person class.
+* Feel free to use the Zoom chat. The staff and/or other students can answer questions during the lecture. The instructor may not be able to monitor the chat in real time.
+* Raise your hand (physically) to signal that you have a question. Should the instructor overlook your raised hand, unmute your mic, then say “question”.
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Class Plan
+
+* Distributed Systems fundamentals
+* Transaction in Bitcoin
+* Consensus
+* Q&A
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Learning outcome
+
+* Able to think blockchain within much larger scope of distributed systems and consensus.
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+How does bitcoin network assures who owns what amount of BTC?   
+Note:
+Using consensus
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## What problem is bitcoin trying to solve
+* Several unknown and untrusting computers try to agree on something in presence of adversaries
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Blockchain primitives
+* Distributed systems 
+  * fundamentals
+  * challenges
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## What a distributed system should do?
+* Ability for the user across the world to interact with each other
+* Agree on common truth without trusting a single machine or authority
+* Consensus?  
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## trust without trust
+* Trust general protocol and math behind it
+* No need to trust
+ * Execution of individual processes
+ * Reliability of any individuals
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Majority opinion; general agreement
+* Trivial when there is only one actor
+* Difficult to agree where to go for lunch when there are more than one actors
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Digital Avionics
+* Aircraft flying at a high altitude poses threat to normal execution of computer programs
+* Bit flip possibility due to thin air, solar radiation can make for e.g. fuel gauge to malfunction
+* Risk of millions of USD plus hundreds of  passengers
+* Solution? (next slide) 
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Redundancy 
+* Avoid single point of failure  
+* Employ multiple computers onboard to distribute point of failures
+* Challenge
+ * Coordination of computer among each other
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Time, Clocks and Ordering of Events in distributed systems 
+<img src="time-clocl-ordering.webp" width="500">
+Note:
+Early literature had focused on enabling coordination of processes
+where these processes could be processes on a CPU or computers in a network,
+separated spatially. 
+Time, Clocks and Ordering of Events in distributed systems is written by leslie lamport
+in late 70s
+
+It shows that two events occurring at separate physical time can be concurrent so long as they don't
+affect one another. Ordering the occurrence of events is important such as measurement of a sensor or
+detection of error and subsequent error correction as well as determining which event actually took place
+is crucial to correct functioning of a distributed system
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Agreement to system state
+* Data loss and corruption prevention
+ * Getting processes on same page on who can write what data at what time
+* In blockchain, full nodes agree on some state of system depending on implementation
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Why study consensus?
+* **Bitcoin** : agree on who owns the bitcoin?
+* **Ethereum** : users agree on correct execution of the transactions and general state of the network
+* Consensus attempts to creates reliable system from potentially unreliable parts :
+ * Computers in aircraft / data centers
+ * Malicious actors in public blockchain
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Distributed Systems
+* Definition
+ * A set of independent **nodes** each representing a **process** 
+ * **Message channels** for information between nodes, establishing a network
+* Purpose :
+ * Accomplish a common goal
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Properties of distributing systems
+* Concurrency : information in the system is processed concurrently
+* No global clock : Each node is responsible for maintaining its own time
+* There is a potential for failure of any individual component, whether this be a dropped message or a failed processor
+</script></section>
+
+
+<section>
+<p data-markdown>
+## Node
+</p>
+
+<div class="left"><p data-markdown>
+* Any device connected to the distributed network
+  * servers
+  * computers 
+  * laptops
+  * online or desktop wallets
+  * mobile phones  
+</p></div>
+
+<div class="right" >
+  <img src="node-network.webp" style="border: none;" />
+</div>
+
+</section>
+
+
+<section data-markdown><script type="text/template">
+
+## Responsibility of a node
+* Validate a new block
+* Store and save the transaction history of a block
+* Update other nodes in the blockchain to ensure all nodes on th blockchain have the latest information
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Types of Node
+* Generally categorized based on sync modes
+  * Full node
+  * Light node
+  * Mining node
+  * Archive node
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Full node
+* Validates all transactions and blocks. 
+* All full nodes support the network by accepting transactions and blocks from other full nodes, 
+validating those transactions and blocks, and then relaying them to further full nodes.
+* A full node validates transactions and blocks and accepts transactions and blocks from other full nodes to support the Bitcoin network. 
+* Store recent few blocks plus checkpoints at few block interval till genesis 
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Light node
+* Depend on full nodes for functioning. 
+* Only download blockheaders from the Bitcoin blockchain. 
+* Verify transactions in the blockchain using simplified payment verification (SPV)
+* Require less download and storage capacities than full nodes. 
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Mining node (Miners)
+* solve complex cryptographic puzzles in a process referred to as “mining”
+* Each miner aims to be the first node to create a new block in the blockchain and to prove that it is the one that has performed the required work (hence Proof of Work). 
+* Once the entire network verifies a transaction, a new block is added to the existing blockchain and the miner receives a reward
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Archive node
+* Host the entire blockchain 
+* Take up more hard-drive space than the pruned full node. 
+* Archive of historical states by downloading not only block header but also block metadata
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## So..
+* What is the key difference between full node and mining node?
+* What is the key difference between full node and archive node?
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Core features of Node types
+![](node-types.webp)
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Bitcoin network of Nodes
+![](bitcoin-node.webp)
+</script></section>
+
+
+<section>
+<p data-markdown>
+## Trilemma of distributed system
+</p>
+
+<div class="left"><p data-markdown>
+* Fundamental theorem of any distributed system pertaining to achievable properties   
+</p></div>
+
+<div class="right" >
+  <img src="cap-theorem-diagram.webp" style="border: none;" />
+</div>
+
+</section>
+
+<section data-markdown style="font-size: xx-large;"><script type="text/template">
+
+## CAP theorem introduction
+* Consistency 
+  * every node provide most recent state of the system
+  * no two nodes will return different states
+  * no node will return outdated state
+* Availability
+ * system allows to make updates and retrieval to state w/o delay
+* Partition tolerance
+ * partition is inability of two or nodes to communicate with each other
+ * partition means messages will not get to their recipient
+ * "partition tolerance" is an ability to function inspite of partition in the network
+<br/>*IRL, a system can only have two of three of these properties at any given time*
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## CAP Example (PA)
+
+* A database stores my favourite color
+* After I graduate from this bootcamp, the color will be say change from blue to red
+* I sent the update to system and it went to Node 1
+* Node 1 relays updated state message to others
+* Node 2 and 4 somehow can't receive update so are not aware of the change in state
+* if I query Node 2, it will avail me the color but not the red.Consistent. 
+</script></section>
+
+<section>
+<p data-markdown>
+## Byzantine fault tolerance
+
+* Possibilities were distributed systems can fail
 </p>
 
 <div class="left" >
-  <img src="headshot.png" style="width:250px; border: none;" />
-  <p data-markdown>
-    * I am fullstack javascript developer, blockchain developer and an Instructor      
-  </p>
+  <img src="The-Traitorous-Messenger.png" style="border: none;" />
 </div>
 
-<div class="right"><p data-markdown>
-* CTO & Senior Blockchain Developer at opty.fi
-* Also Adjunct Professor at George Brown College in Blockchain Development Program
-</p></div>
+<div class="right">
+  <img src="The-Traitorous-General.png" style="border: none;" />
+</div>
 
 </section>
 
 <section data-markdown><script type="text/template">
 
-*"electronic digital documents are so easy to tamper with, and the change need not leave any telltale sign on the physical medium. What is needed is a method of time-stamping digital documents with the following two properties. First, we must find a way to time-stamp the data itself, without any reliance on the characteristics of the medium on which the data appears, so that it is impossible to change even one bit of the document without the change being apparent. Second, it should be impossible to stamp a document with a time and data different from the actual one"* - Haber, Stornetta (1991)
-</script></section>
-
-
-<section data-markdown><script type="text/template">
-
-## History Of Blockchain
-* Bitcoin white paper by Satoshi Nakamoto in 2009
-* Notable additions: Incentive layer and Proof-of-work consensus
-* Ethereum white paper by Vitalik Buterin in 2013, extending Bitcoin with a state machine model
+## Practical Byzantine fault tolerance
+* No solution for 1/3 traitors
+* Solution to all remaining cases : PBFT
+ * PBFT gives an algorithm to allow nodes to come to consensus with no more than 1/3 byzantine 
 
 </script></section>
 
 <section data-markdown><script type="text/template">
 
-## Money
-* Bartering
-* Agreed upon unit of value
-* Economic definitions Of Currency backing in 1900 - 1999 :
- * Gold standard  ~ 1945
- * Bretton - Woods ~ 1975
- * ?? (2020)
+## Faults in distributed systems
+
+* fail-stop 
+ * Node crashes and hence cannot return values
+* Byzantine fault 
+ * Arbitrary deviance from the protocol : means not only the nodes might stop replying or receiving information
+   but also send corrupt and false information
 
 </script></section>
 
 <section data-markdown><script type="text/template">
 
-## Bitcoin
-* Currency : History of transactions!
-* It takes "work" to update and maintain the ledger
-* Miners are incentivized to put in the "work" with rewards
- * There is a limit of 21mn Bitcoins that can exist
- * Halving: works as a synthetic central bank
+## Does this relate to blockchain fundamentals?
 
+* A blockchain is simply a data structure governed by a distributed system with an unbounded and unknown number of
+  byzantine fault possible
+* Inspite of adversial environment, blockchain makes it possible for everyone to come to a consensus 
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Proof Of Work
+* Evidence
+* Spent resources
+* Need to solve a problem via brute forcing
+ * Like brute forcing a password -- trial and error
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Nakamoto Consensus
+* Miners solve partial preimage hash puzzle
+* Prevent Sybil attacks
+Resource(s) consumed = Computational power
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Cons of PoW
+* PoW is highly computationally expensive, hence terrible for the environment
+* Another pitfall is that it can be quite insecure; with small networks it can (and has been multiple times) be exploited via a 51% attack
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Cons of PoW
+
+<img src="btc-emission-news.png" width="400">
+<img src="btc-gold.png" width="500">
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Cons of PoW
+* Plus, it's not really that decentralized
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Cons of PoW
+
+![](miner-pie-chart.png)
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Proof of Stake
+* Proof of Stake serves as a simple modification over PoW that solves these problems
+* PoS allows for miners to get a block reward proportional to the amount of currency that they already own
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Proof of Stake
+* This way, instead of utilizing energy to answer PoW puzzles, a PoS miner is limited to mining a percentage of transactions that is reflective of his or her ownership stake. For instance, a miner who owns 3% of the Bitcoin available can theoretically mine only 3% of the blocks.
+* More hashing power != more mining rewards
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Nothing at Stake Problem
+* However, validators do not have anything at stake when the network forks; they can simply bet on all the forked chains since they have no incentive mechanism to choose
+* Some versions of Gasper punish users who engage in such behavior as it can lead to lack of protection against double spend
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Validator Shuffling
+* Validators can be malicious; the Beacon Chain protects against this by assigning validators to commitees
+* Committees make decisions on blocks and Gasper ensures that all validators are randomly distributed in such a way that "committees are more or less an accurate statistical representation of the overall validator set"
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Validator Shuffling
+
+<img src="validator-shuffling.png" width="600">
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Other Consensus Models
+* DPoS
+* PoST
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Delegated PoS
+
+![](dpos.png)
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Proof Of Spacetime
+
+![](proof-of-spacetime.png)
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Proof Of Spacetime
+
+* "The idea of proof-of-capacity is to require network participants to demonstrate a financial interest in the success of the network by allocating some form of memory or disk space towards it"
+* Miners have to "seal" data that enters the network and periodically have to "prove" they have the data
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## What does Bitcoin provide?
+* Account and Identity management
+ * address for every user associated with amount of currency
+* Services
+ * Transactions between users done by other users
+* Record Management
+ * Redundant information stored between thousands of users via blockchain
+* Trust 
+ * Personal incentive aligning with community goals
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## What is the role of identity in context of currencies?
+* Receiving money
+* Claiming/Spending money
+* Blame
+* Identity in daily life :
+ * Houses have addresses and mailbox keys
+ * Emails have aliases and passwords
+ * Bitcoin has public keys and private keys
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Public and private keys
+* Each entity is represented with a unique public key
+ * A corresponding private key acts as a key to “unlock” the public key, the proverbial chest containing your money
+* Private key chosen at random, public key generated from private key
+ * Public key for receiving, private key for redeeming
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## What if somebody guesses my private key?
+* Bitcoin is hidden in the large amount of public keys
+ * 2<sup>160</sup> (1,461,501,637,330,902,918,203,684,832,716,283,019,655,932,542,97) possible addresses
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Practically impossible for anyone to overlap using random generation of public key
+* Grains of sand on earth: 2<sup>63</sup>
+* With 2<sup>63</sup> earths, each with 263 grains of sand: 2<sup>126</sup> total grains of sand
+* 2<sup>126</sup> is only 0.0000000058% of 2<sup>160</sup>
+* Population of world: 7.8 billion in March 2023
+* Every person could have about 2<sup>127</sup> addresses all to themselves
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## What makes a transaction valid?
+* Proof of ownership (a signature)
+* Available funds
+* No other transactions using the same funds
+</script></section>
+
+<section>
+<p data-markdown>
+## UTXO model
+</p>
+
+<div class="left" ><p data-markdown>
+* Unspent Transaction Output (UTXO)
+ * Bitcoin’s model for transactions
+* Chests (accounts) vs Piggy banks (UTXOs)
+</p></div>
+
+<div class="right">
+  <img src="bitcoin-tx.png" style="border: none;" />
+</div>
+
+</section>
+
+<section data-markdown><script type="text/template">
+
+## Record keeping
+
+* We know how to represent identities and transactions---how do we store all that information? How do we keep track of this ledger of transactions?
+ * With a distributed database
+* Everyone stores there own ledger
 </script></section>
 
 <section data-markdown><script type="text/template">
@@ -197,7 +716,7 @@
 * Combines various other parts of the block to ensure uniqueness
 * Each block stores the previous block's hash, and uses it to compute its own hash
 * Transactions can be hashed sequentially but there's a better way 
- * Merkle Trees next week
+ * Merkle Trees
 
 </script></section>
 
@@ -234,13 +753,6 @@
  * Only unspent outputs are tracked
 
 </script></section>
-
-<section data-markdown><script type="text/template">
-
-15 minute break
-
-</script></section>
-
 
 <section data-markdown><script type="text/template">
 
@@ -292,7 +804,7 @@
 
 </script></section>
 
-<section data-markdown><script type="text/template">
+<section data-markdown style="font-size: xx-large;"><script type="text/template">
 
 ## Addresses and Keys
 
@@ -334,54 +846,13 @@
 
 <section data-markdown><script type="text/template">
 
-## 51% Attack
-
-* How can an attacker control the Bitcoin blockchain? The rewards are surely lucrative...
-* Bitcoin consensus is based on the largest amount of work in a chain
-* Why not just get a ton of computers and just make a chain that must be accepted?
-* This is very hard as they'd need to put in work to change this history as well as change the current chain WHILE non-malicious peers are still mining
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Double Spend
-
-* What happens if a user tries to cheat the system?
-* They can send Bitcoin to another person and then make a simultaneous
-transaction for the same amount to an address they control
-* Transactions sit in the mempool while they are waiting to be mined into a block
-* If they don't have enough hashing power, either transaction gets accepted and they have no choice but to accept
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Double Spend
-
-* However, if they do have enough hashing power...
-* They can buy something like a nice car while they're accumulating blocks 
-* Finally, after they buy the car they can reverse the transaction
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Double Spend
-
-![](double-spend.png)
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
 ## Hard Fork
 
 * Miners can disagree about consensus/scalability/etc.
 * If the sentiment is strong enough, groups of them work together to create a new fork that is a hard fork
 * These cannot be reconciled with the new blocks on the "main chain"
 * Biggest example: BTC and Bitcoin Cash 
-* Others: Bitcoin SV, Bitcoin Gold, ...
+* Others: Ethereum and Ethereum Classic
 
 </script></section>
 
@@ -393,380 +864,27 @@ transaction for the same amount to an address they control
 
 </script></section>
 
+
 <section data-markdown><script type="text/template">
 
-## Class plan
-
-* Blockchain as a state machine
-* Understand peculiarities of the Ethereum ecosystem
-* Different consensus models
-* Contrast DLT from blockchain
+## Q&A 
 
 </script></section>
 
 <section data-markdown><script type="text/template">
 
-## Blockchain Definition
-
-* A blockchain is a “cryptographically secure transactional singleton machine with shared-state.”
-  * Cryptographically secure
-  * Transactional singleton machine
-  * With shared-state
+## Extra Readings
+* [Consensus Mechanisms](https://ethereum.org/en/developers/docs/consensus-mechanisms/)
 
 </script></section>
 
 <section data-markdown><script type="text/template">
 
-## Ethereum
-
-* Ethereum was developed by Vitalik Buterin in 2013 with a goal of building decentralized applications
-* Buterin argued that Bitcoin and blockchain could benefit from other applications besides money and needed a scripting language for application development that could lead to attaching real-world assets such as stocks and property, to the blockchain.
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## State
-
-* A program’s state is the collection of events and interactions during the program lifecycle that it stored in some retrievable format
-* To bring this to blockchain, the transaction data that is stored on the ledger is the state of the ledger
-* *"The "state" in Bitcoin is the collection of all coins (technically, "unspent transaction outputs" or UTXO) that have been mined and not yet spent, with each UTXO having a denomination and an owner"* - Ethereum Whitepaper
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## State
-
-* Vitalik wanted a blockchain that took the concept of state more generally
-* Specifically, he wanted for the blockchain state to store arbitrary information
-* This way, one could run an app that stores crucial state information on the blockchain as opposed to just UTXO information
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## State Machine
-
-* A state machine describes the lifecycle of a system by defining every possible state it can have (based on its variables) as well as every possible state transition
-* In computer science, a state machine refers to something that will read a series of inputs and, based on those inputs, will transition to a new state.
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## State Machine
-
-![](./state-machine.png)
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Ethereum State Machine
-
-* The Ethereum state machine operates with this underlying principle
-* The Genesis block is hence equivalent to a blank state
-* Anyone can deploy applications that write content to the Ethereum blockchain, represented as transactions
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Ethereum State Machine
-
-![](./ethereum-state-machine.png)
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## The Ethereum Virtual Machine
-
-* We have developed this concept of the Ethereum state machine, it is formally known as the EVM
-* It is a "Virtual Machine" as the Ethereum state machine has its own opcodes (just like x86 and ARM/RISC-V)
-* This is because apps write arbitrary data onto the Ethereum blockchain, we need a common data format
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Smart Contracts
-
-* It is actually just an EVM state transition!
-* Since we have a Virtual Machine with its own bytecode, apps need to convert instructions that they want on the blockchain
-* That's why Ethereum developers created a new language: Solidity
-* You can describe the logic of "on-chain" state and state transitions using this abstract language
-* This gets compiled into EVM opcodes so that they can modify the EVM state
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Ethereum Consensus : GHOST
-
-* "Greedy Heaviest Observed Subtree"
-* Lots of wasted computation in BTC blockchain
-*  *"if miner A mines a block and then miner B happens to mine another block before miner A's block propagates to B, miner B's block will end up wasted and will not contribute to network security"* - Ethereum Whitepaper
-* Ethereum initially used PoW, now PoS
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Ethereum Consensus : GHOST
-
-![](./ethereum-consensus-ghost.png)
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Ethereum Consensus : GHOST
-
-* *"GHOST solves the first issue of network security loss by including stale blocks in the calculation of which chain is the "longest"; that is to say, not just the parent and further ancestors of a block, but also the stale descendants of the block's ancestor (in Ethereum jargon, "uncles") are added to the calculation of which block has the largest total proof of work backing it"* - Ethereum Whitepaper
-* Further, the "uncle" and "nephew" blocks also receive a portion of the block reward
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Gas Costs
-
-* Storing data on the blockchain is expensive
-  * Big computational cost for PoW
-  * Data is immutable, stored forever
-* Every opcode incurred in a state transition of the EVM has a cost represented by "gas"
-  * 1 opcode is roughly 1 gas
-  * Gas prices are denoted in Gwei, which itself is a denomination of ETH - each Gwei is equal to 0.000000001 ETH (10<sup>-9</sup> ETH).
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Gas Costs
-* In blockchains, the miner fee scales with the size of data intended to be stored on the ledger
-* As a result, large data (e.g. files) are not directly stored on the blockchain. Rather, a hash is stored on the chain and the data is stored in an immutable, highly available content storage (e.g. Ethereum Swarm, IPFS) which is typically decentralized
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Cons of PoW
-* PoW is highly computationally expensive, hence terrible for the environment
-* Another pitfall is that it can be quite insecure; with small networks it can (and has been multiple times) be exploited via a 51% attack
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Cons of PoW
-
-<img src="btc-emission-news.png" width="400">
-<img src="btc-gold.png" width="500">
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Cons of PoW
-* Plus, it's not really that decentralized
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Cons of PoW
-
-![](miner-pie-chart.png)
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## 15 minute break
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Proof of Stake
-* Proof of Stake serves as a simple modification over PoW that solves these problems
-* PoS allows for miners to get a block reward proportional to the amount of currency that they already own
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Proof of Stake
-* This way, instead of utilizing energy to answer PoW puzzles, a PoS miner is limited to mining a percentage of transactions that is reflective of his or her ownership stake. For instance, a miner who owns 3% of the Bitcoin available can theoretically mine only 3% of the blocks.
-* More hashing power != more mining rewards
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Ethereum 2.0: Gasper, the Friendly GHOST
-
-* In Ethereum's Proof-of-Stake is done with the concept of mining
-* Instead, ETH holders who are running a validator node are able to place bets with their Ether
-* Each bet represents which block they think will be mined next
-* If their bet is correct, they get their stake back plus the block reward 
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Ethereum 2.0: Gasper, the Friendly GHOST
-
-* If they are incorrect, they just get their stake back
-* This new system is called the "Beacon Chain"
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Nothing at Stake Problem
-* However, validators do not have anything at stake when the network forks; they can simply bet on all the forked chains since they have no incentive mechanism to choose
-* Some versions of Gasper punish users who engage in such behavior as it can lead to lack of protection against double spend
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Validator Shuffling
-* Validators can be malicious; the Beacon Chain protects against this by assigning validators to commitees
-* Committees make decisions on blocks and Gasper ensures that all validators are randomly distributed in such a way that "committees are more or less an accurate statistical representation of the overall validator set"
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Validator Shuffling
-
-<img src="validator-shuffling.png" width="600">
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Blockchain wars
-
-<img src="pct-tmc.png" width="600">
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Blockchain wars
-
-<img src="race-chart.png" width="600">
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Blockchain wars
-
-![](blokchain-proj.png)
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Blockchain wars
-
-<img src="equity-funding.png" width="600">
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Other Consensus Models
-* DPoS
-* PoST
-* Iota
-* Avalanche 
-* Tendermint
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Delegated PoS
-
-![](dpos.png)
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Proof Of Spacetime
-
-![](proof-of-spacetime.png)
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Proof Of Spacetime
-
-* "The idea of proof-of-capacity is to require network participants to demonstrate a financial interest in the success of the network by allocating some form of memory or disk space towards it"
-* Miners have to "seal" data that enters the network and periodically have to "prove" they have the data
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Avalanche
-
-![](avalanche-consensus.png)
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Tendermint
-
-* Tendermint is software for securely and consistently replicating an application on many machine
-  * works even if up to 1/3 of machines fail in arbitrary ways
-  * every non-faulty machine sees the same transaction log and computes the same state
-* The ability to tolerate machines failing in arbitrary ways, including becoming malicious, is known as Byzantine fault tolerance (BFT)
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Tendermint
-
-* BFT theory is pretty old (late 1970s)
-* Blockchain technology is just a reformalization of BFT in a more modern setting
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Byzantine Generals Problem
-
-* Coordination required for system to work
-
-![](byzantine.png)
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Tendermint
-
-* Bitcoin is a cryptocurrency blockchain where each node maintains a fully audited Unspent Transaction Output (UTXO) database. If one wanted to create a Bitcoin-like system on top of ABCI, Tendermint Core would be responsible for
-  * Sharing blocks and transactions between nodes
-  * Establishing a canonical/immutable order of transactions (the blockchain)
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Tendermint
-
-* The application will be responsible for 
-  * Maintaining the UTXO database
-  * Validating cryptographic signatures of transactions
-  * Preventing transactions from spending non-existent transactions 
-  * Allowing clients to query the UTXO database.
-
+## References
+
+* [Time, Clocks, and Ordering of Events in a Distributed System](https://swizec.com/blog/week-7-time-clocks-and-ordering-of-events-in-a-distributed-system/)
+* [Classification and importance of nodes in a blockchain network](https://www.seba.swiss/research/Classification-and-importance-of-nodes-in-a-blockchain-network)
+* [What is a Bitcoin Node?](https://www.bitpanda.com/academy/en/lessons/what-is-a-bitcoin-node/)
 </script></section>
 
 <section data-markdown><script type="text/template">
