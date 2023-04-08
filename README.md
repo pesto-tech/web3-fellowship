@@ -9,3 +9,5 @@ git clone https://github.com/pesto-tech/web3-fellowship.git
 cd web3-fellowship
 git submodule update --init
 ```
+
+Content in this repository cannot be shared, reused and reproduced without written consent from the author.
